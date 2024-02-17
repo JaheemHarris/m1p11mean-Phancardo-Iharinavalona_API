@@ -1,0 +1,30 @@
+{
+  "name": "m1p10mean-iharinavalona-phancardo-api",
+  "version": "1.0.0",
+  "description": "Glamify REST API",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "MEAN",
+    "Express",
+    "API",
+    "REST"
+  ],
+  "author": "Iharinavalona",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.4",
+    "express": "^4.18.2",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.1.3",
+    "nodemailer": "^6.9.9",
+    "winston": "^3.11.0"
+  }
+}
