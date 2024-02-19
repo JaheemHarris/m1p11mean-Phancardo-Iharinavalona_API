@@ -32,3 +32,9 @@ error: 2024-02-19 19:30:51 - Mongo DB URI: mongodb://127.0.0.1:27017/glamify
 info: 2024-02-19 19:37:56 - Server is running on port: 8080
 info: 2024-02-19 19:37:56 - Connection to Mongo DB database: glamify established
 error: 2024-02-19 19:37:56 - Mongo DB URI: mongodb://127.0.0.1:27017/glamify
+info: 2024-02-19 19:40:15 - Server is running on port: 8080
+info: 2024-02-19 19:40:15 - Connection to Mongo DB database: glamify established
+error: 2024-02-19 19:40:15 - Mongo DB URI: mongodb://127.0.0.1:27017/glamify
+info: 2024-02-19 19:51:00 - Server is running on port: 8080
+info: 2024-02-19 19:51:00 - Connection to Mongo DB database: glamify established
+error: 2024-02-19 19:51:00 - Mongo DB URI: mongodb://127.0.0.1:27017/glamify
