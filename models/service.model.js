@@ -36,5 +36,5 @@ const serviceSchema = new mongoose.Schema({
 
 // ADD created_at and update_at fields
 serviceSchema.set("timestamps", true);
-const Servicedb = mongoose.model("service", serviceSchema);
-module.exports = Servicedb;
+const serviceModel = mongoose.model("service", serviceSchema);
+module.exports = serviceModel;
