@@ -3,11 +3,26 @@ const mongoose = require("mongoose");
 const options = { discriminatorKey: "role" };
 const userSchema = new mongoose.Schema(
 	{
-		lastname: String,
-		firstname: String,
-		email: String,
-		password: String,
-		isActivated: Boolean,
+		lastname: {
+			type: String,
+			required: true,
+		},
+		firstname: {
+			type: String,
+			required: true,
+		},
+		email: {
+			type: String,
+			required: true,
+		},
+		password: {
+			type: String,
+			required: true,
+		},
+		isActivated: {
+			type: Boolean,
+			default: true,
+		},
 	},
 	options
 );
@@ -15,4 +30,4 @@ const userSchema = new mongoose.Schema(
 // ADD created_at and update_at fields
 userSchema.set("timestamps", true);
 const UserModel = mongoose.model("User", userSchema);
-module.exports = UserModel;
+module.exports = { userSchema, UserModel };

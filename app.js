@@ -3,7 +3,7 @@ const logger = require("./lib/logger");
 const morganMiddleware = require("./middlewares/morgan.middleware");
 const cors = require("cors");
 const dbService = require("./services/database.service");
-const { UserRoutes } = require("./routes");
+const { UserRoutes, CustomerRoutes } = require("./routes");
 
 const app = express();
 const PORT = "8080";
@@ -21,6 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", UserRoutes);
+app.use("/customers", CustomerRoutes);
 
 app.listen(PORT, () => {
 	logger.info(`Server is running on port: ${PORT}`);
