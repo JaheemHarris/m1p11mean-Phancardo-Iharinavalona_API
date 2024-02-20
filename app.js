@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const logger = require("./lib/logger");
 const morganMiddleware = require("./middlewares/morgan.middleware");
 const cors = require("cors");
@@ -6,7 +7,7 @@ const dbService = require("./services/database.service");
 const { UserRoutes, CustomerRoutes } = require("./routes");
 
 const app = express();
-const PORT = "8080";
+const PORT = process.env.PORT || 3000;
 dbService.openDbConnection();
 
 app.use(cors());

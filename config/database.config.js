@@ -1,5 +1,7 @@
-const DB_NAME = "glamify";
-const MONGODB_URL = "mongodb://127.0.0.1:27017";
+require("dotenv").config();
+
+const DB_NAME = process.env.DB_NAME;
+const MONGODB_URL = process.env.MONGODB_URL;
 
 module.exports = {
 	DB_NAME,
