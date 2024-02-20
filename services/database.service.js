@@ -10,7 +10,7 @@ const openDbConnection = async () => {
 		logger.error(`Failed to connect to Mongo DB database: ${DB_NAME}`);
 		logger.error(`${error.toString()}`);
 	} finally {
-		logger.error(`Mongo DB URI: ${MONGODB_URL}/${DB_NAME}`);
+		logger.info(`Mongo DB URI: ${MONGODB_URL}/${DB_NAME}`);
 	}
 };
 
