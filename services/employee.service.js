@@ -1,9 +1,16 @@
 const { EmployeeModel } = require("../models/employee.model");
 const { UserModel } = require("../models/user.model");
 
-const getEmployee = async () => {
+const getEmployees = async () => {
 	try {
 		return await EmployeeModel.find();
+	} catch (error) {
+		throw error;
+	}
+};
+const getEmployeeById = async (employeeId) => {
+	try {
+		return await EmployeeModel.findById(employeeId);
 	} catch (error) {
 		throw error;
 	}
@@ -17,17 +24,43 @@ const saveEmployee = async (employee) => {
 	}
 };
 
-const deleteEmployee = async (employee) => {
+const editEmployee = async (id,newData) => {
 	try {
-        //desactivation d'user
-		return await EmployeeModel.desactivation(employee);
+		//desactivation d'user
+        //const employee = EmployeeModel.findById(id); 
+        //const newData = { isActivated: false};
+		return await EmployeeModel.findByIdAndUpdate(id,newData,{new: true})
 	} catch (error) {
 		throw error;
 	}
 };
 
+const deleteEmployee = async (id) => {
+	try {
+		//desactivation d'user
+        //const employee = EmployeeModel.findById(id); 
+        const newData = { isActivated: false};
+		return await EmployeeModel.findByIdAndUpdate(id,newData,{new: true})
+	} catch (error) {
+		throw error;
+	}
+};
+
+// const genereta = async (id) => {
+// 	try {
+// 		//desactivation d'user
+//         //const employee = EmployeeModel.findById(id); 
+//         const newData = { isActivated: false};
+// 		return await EmployeeModel.findByIdAndUpdate(id,newData,{new: true})
+// 	} catch (error) {
+// 		throw error;
+// 	}
+// };
+
 module.exports = {
-	getEmployee,
-    saveEmployee,
-    deleteEmployee,
+	getEmployees,
+	saveEmployee,
+	deleteEmployee,
+    getEmployeeById,
+    editEmployee,
 };
