@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
 
-app.use(UserRoutes);
+app.use("/users",UserRoutes);
 app.use("/customers", CustomerRoutes);
 app.use("/employees", EmployeeRoutes);
 

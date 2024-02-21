@@ -11,4 +11,5 @@ const EmployeeModel = UserModel.discriminator(
 	employeeSchema,
 	ROLES.EMPLOYEE
 );
-module.exports = EmployeeModel;
+module.exports = {employeeSchema,EmployeeModel};
+
