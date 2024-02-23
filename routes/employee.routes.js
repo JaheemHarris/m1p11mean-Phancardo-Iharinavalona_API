@@ -8,6 +8,7 @@ router.get("/:id", EmployeeController.getEmployeeById);
 router.post("/", validateUser, EmployeeController.saveEmployee);
 router.delete("/:id", EmployeeController.deleteEmployee);
 router.put("/:id", EmployeeController.editEmployee);
+router.patch("/:id", EmployeeController.editEmployee);
 
 
 module.exports = router;
