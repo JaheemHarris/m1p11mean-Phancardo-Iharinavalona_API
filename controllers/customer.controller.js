@@ -20,5 +20,5 @@ const saveCustomer = async (req, res) => {
 
 module.exports = {
 	getCustomers,
-	saveCustomer,
+	saveCustomer
 };

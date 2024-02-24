@@ -1,16 +1,15 @@
 const mongoose = require("mongoose");
-
 const serviceSchema = new mongoose.Schema({
 	name: {
 		type: String,
-		required: true,
+		required: true
 	},
 	description: {
 		type: String,
 	},
 	price: {
 		type: Number,
-		required: true,
+		required: true
 	},
 	duration: {
 		type: Number,
@@ -31,10 +30,12 @@ const serviceSchema = new mongoose.Schema({
 	isActivated: {
 		type: Boolean,
 		default: true,
-	},
+	 }
 });
 
 // ADD created_at and update_at fields
 serviceSchema.set("timestamps", true);
-const serviceModel = mongoose.model("service", serviceSchema);
-module.exports = serviceModel;
+const serviceModel = mongoose.model("Service", serviceSchema);
+
+module.exports = serviceModel
+

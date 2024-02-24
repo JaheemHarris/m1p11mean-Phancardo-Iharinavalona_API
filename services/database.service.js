@@ -1,7 +1,6 @@
 const { DB_NAME, MONGODB_URL } = require("../config/database.config");
 const logger = require("../lib/logger");
 const mongoose = require("mongoose");
-
 const openDbConnection = async () => {
 	try {
 		await mongoose.connect(`${MONGODB_URL}/${DB_NAME}`);
