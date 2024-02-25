@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
 const ZOHO_MAIL = process.env.ZOHO_MAIL;
 const GMAIL_EMAIL = process.env.GMAIL_EMAIL;

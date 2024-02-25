@@ -31,7 +31,7 @@ app.use("/users", UserRoutes);
 app.use("/customers", CustomerRoutes);
 app.use("/employees", EmployeeRoutes);
 app.use("/services", ServiceRoutes);
-app.use("/email", EmailRoutes)
+app.use("/email", EmailRoutes);
 
 app.listen(PORT, () => {
 	logger.info(`Server is running on port: ${PORT}`);
