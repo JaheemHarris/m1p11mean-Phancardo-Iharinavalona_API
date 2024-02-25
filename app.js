@@ -4,7 +4,13 @@ const logger = require("./lib/logger");
 const morganMiddleware = require("./middlewares/morgan.middleware");
 const cors = require("cors");
 const dbService = require("./services/database.service");
-const { UserRoutes, CustomerRoutes, EmployeeRoutes,ServiceRoutes} = require("./routes");
+const {
+	UserRoutes,
+	CustomerRoutes,
+	EmployeeRoutes,
+	ServiceRoutes,
+	EmailRoutes,
+} = require("./routes");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,6 +31,7 @@ app.use("/users", UserRoutes);
 app.use("/customers", CustomerRoutes);
 app.use("/employees", EmployeeRoutes);
 app.use("/services", ServiceRoutes);
+app.use("/email", EmailRoutes);
 
 app.listen(PORT, () => {
 	logger.info(`Server is running on port: ${PORT}`);
