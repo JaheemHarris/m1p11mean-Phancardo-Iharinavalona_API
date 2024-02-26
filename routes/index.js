@@ -3,6 +3,7 @@ const CustomerRoutes = require("./customer.routes");
 const EmployeeRoutes = require("./employee.routes");
 const ServiceRoutes = require("./service.routes");
 const EmailRoutes = require("./email.routes");
+const AuthRoutes = require("./auth.routes");
 
 module.exports = {
 	UserRoutes,
@@ -10,4 +11,5 @@ module.exports = {
 	EmployeeRoutes,
 	ServiceRoutes,
 	EmailRoutes,
+	AuthRoutes,
 };
