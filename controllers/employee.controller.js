@@ -1,6 +1,11 @@
 const EmployeeService = require("../services/employee.service");
-const nodemailer = require("nodemailer");
-const bcrypt = require('bcrypt');
+const { createAPIResponse } = require("../lib/api");
+const { EmployeeModel } = require("../models/employee.model");
+const {
+	generatePassword,
+	passwordEncrypt,
+} = require("../lib/password-encrypt");
+const { UserModel } = require("../models/user.model");
 
 const getEmployees = async (req, res) => {
 	try {
@@ -10,6 +15,28 @@ const getEmployees = async (req, res) => {
 		res.status(400);
 	}
 };
+
+const getActivatedEmployees = async (req, res) => {
+	try {
+		const employees = await EmployeeService.getEmployees();
+		res
+			.status(200)
+			.json(createAPIResponse({ status: 200, success: true, result: employees }));
+	} catch (error) {
+		res.status(500).json(
+			createAPIResponse({
+				status: 500,
+				success: false,
+				error: [
+					{
+						message: error.toString(),
+					},
+				],
+			})
+		);
+	}
+};
+
 const getEmployeeById = async (req, res) => {
 	try {
 		const id = req.params.id;
@@ -19,72 +46,82 @@ const getEmployeeById = async (req, res) => {
 		res.status(400);
 	}
 };
+
 const saveEmployee = async (req, res) => {
 	try {
-		const password = Math.random().toString(36).slice(-8);
-		const salt = await bcrypt.genSalt(10);
-		const hashedPassword = await bcrypt.hash(password, salt);
-		req.body.password = hashedPassword;
-		
-		const transporter = nodemailer.createTransport({
-			service: "gmail",
-			auth: {
-				user: process.env.NODEMAILER_USERNAME,
-				pass:  process.env.NODEMAILER_PASSWORD,
-			},
-		});
-
-		const mailOptions = {
-			from: process.env.NODEMAILER_USERNAME,
-			to: req.body.email,
-			subject: "Compte employé Glamify",
-			text: "Voici votre compte : Username " + req.body.email + ", Password:" + password,
-		};
-
-		console.log(mailOptions)
-
-		// Sending the email
-		transporter.sendMail(mailOptions, function (error, info) {
-			if (error) {
-				console.error("Error occurred:", error.message);
+		UserModel.findOne({ email: req.body.email }).then(async (user) => {
+			if (!user) {
+				const password = generatePassword();
+				const hashedPassword = await passwordEncrypt(password);
+				const newEmployee = new EmployeeModel({
+					lastname: req.body.lastname,
+					firstname: req.body.firstname,
+					email: req.body.email,
+					password: hashedPassword,
+				});
+				EmployeeService.saveEmployee(newEmployee).then((createdEmployee) => {
+					EmployeeService.sendNewEmployeeEmail({
+						employee: createdEmployee,
+						generatedPassword: password,
+					});
+					res
+						.status(201)
+						.json(
+							createAPIResponse({ status: 201, success: true, result: createdEmployee })
+						);
+				});
 			} else {
-				console.log("Email send successfully!");
-				console.log("Message ID:", info.messageId);
+				res.status(200).json(
+					createAPIResponse({
+						status: 200,
+						success: false,
+						error: [
+							{
+								message: "User with this email alredy exists!",
+							},
+						],
+					})
+				);
 			}
 		});
-		//console.log(req.body)
-		const employee = await EmployeeService.saveEmployee(req.body);
-		res.status(201).json(employee);
 	} catch (error) {
-		res.status(400).json({
-			error:true,
-			message:"erreur de serveur"
-		})
-		console.log(error)
+		res.status(500).json(
+			createAPIResponse({
+				status: 500,
+				success: false,
+				error: [
+					{
+						message: error.toString(),
+					},
+				],
+			})
+		);
 	}
 };
+
 const editEmployee = async (req, res) => {
 	try {
 		const employee = await EmployeeService.editEmployee(req.params.id, req.body);
 		res.status(200).json(employee);
 	} catch (error) {
-			res.status(400).json({
-			error:true,
-			message:"erreur de serveur"
-		})
-	console.log(error)
+		res.status(400).json({
+			error: true,
+			message: "erreur de serveur",
+		});
+		console.log(error);
 	}
 };
+
 const deleteEmployee = async (req, res) => {
 	try {
 		const employee = await EmployeeService.deleteEmployee(req.params.id);
 		res.status(200).json(employee);
 	} catch (error) {
 		res.status(400).json({
-			error:true,
-			message:"erreur de serveur"
-		})
-		console.log(error)
+			error: true,
+			message: "erreur de serveur",
+		});
+		console.log(error);
 	}
 };
 
@@ -94,4 +131,5 @@ module.exports = {
 	getEmployeeById,
 	deleteEmployee,
 	editEmployee,
+	getActivatedEmployees,
 };
