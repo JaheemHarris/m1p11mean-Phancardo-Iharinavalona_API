@@ -4,7 +4,7 @@ const EmailService = require("../lib/email");
 
 const getEmployees = async () => {
 	try {
-		return await EmployeeModel.find({ isActivated: true });
+		return await EmployeeModel.find();
 	} catch (error) {
 		throw error;
 	}
