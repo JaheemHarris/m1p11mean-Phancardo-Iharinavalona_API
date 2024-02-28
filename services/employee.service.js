@@ -1,9 +1,8 @@
 const { EmployeeModel } = require("../models/employee.model");
 
-
 const getEmployees = async () => {
 	try {
-		return await EmployeeModel.find();
+		return await EmployeeModel.find({ isActivated: false });
 	} catch (error) {
 		throw error;
 	}
@@ -24,12 +23,12 @@ const saveEmployee = async (employee) => {
 	}
 };
 
-const editEmployee = async (id,newData) => {
+const editEmployee = async (id, newData) => {
 	try {
 		//desactivation d'user
-        //const employee = EmployeeModel.findById(id); 
-        //const newData = { isActivated: false};
-		return await EmployeeModel.findByIdAndUpdate(id,newData,{new: true})
+		//const employee = EmployeeModel.findById(id);
+		//const newData = { isActivated: false};
+		return await EmployeeModel.findByIdAndUpdate(id, newData, { new: true });
 	} catch (error) {
 		throw error;
 	}
@@ -38,9 +37,9 @@ const editEmployee = async (id,newData) => {
 const deleteEmployee = async (id) => {
 	try {
 		//desactivation d'user
-        //const employee = EmployeeModel.findById(id); 
-        const newData = { isActivated: false};
-		return await EmployeeModel.findByIdAndUpdate(id,newData,{new: true})
+		//const employee = EmployeeModel.findById(id);
+		const newData = { isActivated: false };
+		return await EmployeeModel.findByIdAndUpdate(id, newData, { new: true });
 	} catch (error) {
 		throw error;
 	}
@@ -49,7 +48,7 @@ const deleteEmployee = async (id) => {
 // const genereta = async (id) => {
 // 	try {
 // 		//desactivation d'user
-//         //const employee = EmployeeModel.findById(id); 
+//         //const employee = EmployeeModel.findById(id);
 //         const newData = { isActivated: false};
 // 		return await EmployeeModel.findByIdAndUpdate(id,newData,{new: true})
 // 	} catch (error) {
@@ -61,6 +60,6 @@ module.exports = {
 	getEmployees,
 	saveEmployee,
 	deleteEmployee,
-    getEmployeeById,
-    editEmployee,
+	getEmployeeById,
+	editEmployee,
 };
