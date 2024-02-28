@@ -87,9 +87,9 @@ const register = async (req, res) => {
 						.json(createAPIResponse({ status: 201, success: true, result: createdUser }));
 				});
 			} else {
-				res.status(400).json(
+				res.status(200).json(
 					createAPIResponse({
-						status: 400,
+						status: 200,
 						success: false,
 						error: [
 							{
