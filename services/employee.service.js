@@ -2,7 +2,7 @@ const { EmployeeModel } = require("../models/employee.model");
 
 const getEmployees = async () => {
 	try {
-		return await EmployeeModel.find({ isActivated: false });
+		return await EmployeeModel.find({ isActivated: true });
 	} catch (error) {
 		throw error;
 	}
