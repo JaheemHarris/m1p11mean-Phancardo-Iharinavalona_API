@@ -78,7 +78,7 @@ const editEmployee = async (req, res) => {
 const deleteEmployee = async (req, res) => {
 	try {
 		const employee = await EmployeeService.deleteEmployee(req.params.id);
-		res.status(201).json(employee);
+		res.status(200).json(employee);
 	} catch (error) {
 		res.status(400).json({
 			error:true,
