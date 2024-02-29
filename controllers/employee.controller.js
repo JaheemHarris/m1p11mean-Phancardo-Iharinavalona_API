@@ -18,7 +18,7 @@ const getEmployees = async (req, res) => {
 
 const getActivatedEmployees = async (req, res) => {
 	try {
-		const employees = await EmployeeService.getEmployees();
+		const employees = await EmployeeService.getActivatedEmployees();
 		res
 			.status(200)
 			.json(createAPIResponse({ status: 200, success: true, result: employees }));
