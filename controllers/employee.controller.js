@@ -40,10 +40,22 @@ const getActivatedEmployees = async (req, res) => {
 const getEmployeeById = async (req, res) => {
 	try {
 		const id = req.params.id;
-		const employees = await EmployeeService.getEmployeeById(id);
-		res.json(employees);
+		const employee = await EmployeeService.getEmployeeById(id);
+		res.status(200).json(
+			createAPIResponse({
+				status: 200,
+				success: true,
+				result: employee,
+			})
+		);
 	} catch (error) {
-		res.status(400);
+		res.status(500).json(
+			createAPIResponse({
+				status: 500,
+				success: false,
+				error: [{ message: error.toString() }],
+			})
+		);
 	}
 };
 
@@ -115,13 +127,21 @@ const editEmployee = async (req, res) => {
 const deleteEmployee = async (req, res) => {
 	try {
 		const employee = await EmployeeService.deleteEmployee(req.params.id);
-		res.status(200).json(employee);
+		res
+			.status(200)
+			.json(createAPIResponse({ status: 200, success: true, result: employee }));
 	} catch (error) {
-		res.status(400).json({
-			error: true,
-			message: "erreur de serveur",
-		});
-		console.log(error);
+		res.status(500).json(
+			createAPIResponse({
+				status: 500,
+				success: false,
+				error: [
+					{
+						message: error.toString(),
+					},
+				],
+			})
+		);
 	}
 };
 
